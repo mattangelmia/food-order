@@ -48,6 +48,7 @@ export default function CartModal(props) {
               <div style={{ width: "10vh" }}>
                 <h3>{food.food}</h3>
                 <p>{food.price}</p>
+                <p>Quantity: {food.quantity}</p>
               </div>
               <div style={{ display: "flex" }}>
                 <button style={{ margin: "10px", maxHeight: "20px" }}>-</button>

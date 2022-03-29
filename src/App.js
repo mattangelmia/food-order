@@ -6,14 +6,6 @@ import FoodList from "./FoodList";
 import CartModal from "./CartModal";
 import "animate.css";
 
-function foodReducer(state, action) {
-  if (action.type === "MODAL_DISPLAY") {
-    return { modalDisplay: "flex" };
-  }
-
-  return { modalDisplay: "none" };
-}
-
 function App() {
   const [foods, setFoods] = useState([
     {
@@ -43,22 +35,39 @@ function App() {
       quantity: 1,
     },
   ]);
+
+  const [totalFoodAmount, setTotalFoodAmount] = useState(0);
+
   // const [modalDisplay, setModalDisplay] = useState("none");
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartFoods, setCartFoods] = useState([]);
   const [cartItem, setCartItem] = useState({});
+  const [modalDisplay, setModalDisplay] = useState("none");
   const [amountValue, setAmountValue] = useState(0);
 
   const [foodState, dispatch] = useReducer(foodReducer, {
     modalDisplay: "none",
+    totalFoodPrice: 0,
+    cartFoodItems: [],
   });
 
-  function setDisplay() {
-    // setModalDisplay("flex");
+  function foodReducer(state, action) {
+    if (action.type === "ADD_CART_ITEMS") {
+      return {
+        ...state,
+        cartFoodItems: state.cartFoodItems.concat(action.val),
+      };
+    }
   }
-  // function removeModal() {
-  //   setModalDisplay("none");
-  // }
+
+  function setDisplay() {
+    // dispatch({ type: "ADD_MODAL_DISPLAY" }); -- caused undefined error
+    setModalDisplay("flex");
+  }
+  function removeModal() {
+    // dispatch({ type: "REMOVE_MODAL_DISPLAY" }); -- caused undefined error
+    setModalDisplay("none");
+  }
 
   function setQuantity(e) {
     console.log(e.target.value);
@@ -67,23 +76,32 @@ function App() {
   function addFood(food) {
     console.log(food);
     let newFoodItem = { ...food, quantity: amountValue };
-    setCartFoods((prevState) => cartFoods.concat(newFoodItem));
-    setTotalPrice(totalPrice + Number(food.price));
+    // setCartFoods((prevState) => cartFoods.concat(newFoodItem));
+    dispatch({ type: "ADD_CART_ITEMS", val: newFoodItem });
+
     // ask slavo specific question on why state doesnt update right away when you console.log(cartFoods) inside the function
   }
 
   useEffect(() => {
-    console.log(cartFoods);
-  }, [cartFoods]);
+    let total = foodState.cartFoodItems.reduce(function (a, b) {
+      return a + Number(b.quantity);
+    }, 0);
+
+    setTotalFoodAmount(total);
+
+    foodState.cartFoodItems.map((food) =>
+      setTotalPrice(totalPrice + food.price * food.quantity)
+    );
+  }, [foodState]);
 
   return (
     <div className="App">
-      <NavHeader cartQuantity={cartFoods.length} setDisplay={setDisplay} />
+      <NavHeader cartQuantity={totalFoodAmount} setDisplay={setDisplay} />
       <FoodList foodList={foods} addFood={addFood} setAmount={setQuantity} />
       <CartModal
-        cartFoods={cartFoods}
-        display={foodState.modalDisplay}
-        // closeModal={removeModal}
+        cartFoods={foodState.cartFoodItems}
+        display={modalDisplay}
+        closeModal={removeModal}
         totalPrice={totalPrice}
       />
     </div>
