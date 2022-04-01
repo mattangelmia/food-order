@@ -25,6 +25,8 @@ export default function FoodList(props) {
               <h3>Amount</h3>
               <input
                 type="number"
+                min="1"
+                max="5s"
                 onChange={(e) => props.setAmount(e)}
                 style={{
                   height: "15px",

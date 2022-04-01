@@ -77,7 +77,23 @@
 }
 
 
+@keyframes slidein {
+  from {
+    transform: translateY(-50%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+
 .cart-modal{
   animation-duration: .5s;
   animation-name: slidein;
+}
+
+#cart-header{
+  animation-duration: .1s;
+  animation-name: grow;
 }

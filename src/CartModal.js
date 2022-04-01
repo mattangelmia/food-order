@@ -51,8 +51,18 @@ export default function CartModal(props) {
                 <p>Quantity: {food.quantity}</p>
               </div>
               <div style={{ display: "flex" }}>
-                <button style={{ margin: "10px", maxHeight: "20px" }}>-</button>
-                <button style={{ margin: "10px", maxHeight: "20px" }}>+</button>
+                <button
+                  onClick={() => props.deleteFood(food)}
+                  style={{ margin: "10px", maxHeight: "20px" }}
+                >
+                  -
+                </button>
+                <button
+                  onClick={() => props.addFood(food)}
+                  style={{ margin: "10px", maxHeight: "20px" }}
+                >
+                  +
+                </button>
               </div>
             </div>
           ))

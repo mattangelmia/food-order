@@ -3,6 +3,7 @@ import React from "react";
 export default function Cart(props) {
   return (
     <div
+      id="cart-header"
       style={{
         display: "flex",
         marginRight: "35px",
