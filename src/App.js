@@ -106,6 +106,13 @@ function App() {
     setCartFoods(filtered.concat(addedFood));
   }
 
+  function deleteFoods(food) {
+    let deletedFood = { ...food, quantity: Number(food.quantity) - 1 };
+    let filtered = cartFoods.filter((c) => c.food !== deletedFood.food);
+    setCartFoods(filtered.concat(deletedFood));
+    console.log(food);
+  }
+
   return (
     <div className="App">
       <NavHeader cartQuantity={totalFoodAmount} setDisplay={setDisplay} />
@@ -116,6 +123,7 @@ function App() {
         closeModal={removeModal}
         totalPrice={totalPrice}
         addFood={addMoreFood}
+        deleteFood={deleteFoods}
       />
     </div>
   );
