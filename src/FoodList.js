@@ -1,10 +1,15 @@
 import React from "react";
 import Add from "./Add";
 import { useSelector, useDispatch } from "react-redux";
+import { addFood } from "./features/realCartFoodsSlice";
 
 export default function FoodList(props) {
   const foodList = useSelector((state) => state.foods.foods);
   console.log(foodList);
+  const cartFoods = useSelector((state) => state.cartFoods);
+  console.log(cartFoods);
+  const dispatch = useDispatch();
+
   return (
     <div
       style={{ border: "1px solid lightgrey", margin: "70px", width: "60vh" }}
@@ -18,6 +23,7 @@ export default function FoodList(props) {
           }}
           key={index}
         >
+          `
           <div style={{ width: "100vh" }}>
             <h1>{food.food}</h1>
             <p>{food.description}</p>
@@ -40,6 +46,7 @@ export default function FoodList(props) {
               ></input>
             </div>
             <Add addFood={(e) => props.addFood(e)} food={food} />
+            <button onClick={() => dispatch(addFood(food))}></button>
           </div>
         </div>
       ))}
