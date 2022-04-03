@@ -9,40 +9,12 @@ import "animate.css";
 function App() {
   // initial food state array of objects
   const [totals, setTotals] = useState([]);
-  const [foods, setFoods] = useState([
-    {
-      food: "sushi roll",
-      description: "fresh tuna topped with eel sauce and avocado",
-      price: "14.99",
-      quantity: 1,
-    },
-
-    {
-      food: "pizza",
-      description: "baked to a crisp with mozarrella, basil and tomato sauce",
-      price: "9.99",
-      quantity: 1,
-    },
-    {
-      food: "special fried rice",
-      description: "cooked with onions , shrimp , chicken",
-      price: "19.99",
-      quantity: 1,
-    },
-    {
-      food: "tacos",
-      description:
-        "choice of either ,shrimp , chicken, or steak, topped with pico de gallo",
-      price: "15.99",
-      quantity: 1,
-    },
-  ]);
 
   const [totalFoodAmount, setTotalFoodAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartFoods, setCartFoods] = useState([]);
   const [cartItem, setCartItem] = useState({});
-  const [modalDisplay, setModalDisplay] = useState("none");
+
   const [amountValue, setAmountValue] = useState(0);
 
   // function foodReducer(state, action) {
@@ -65,11 +37,9 @@ function App() {
 
   function setDisplay() {
     // dispatch({ type: "ADD_MODAL_DISPLAY" });
-    setModalDisplay("flex");
   }
   function removeModal() {
     // dispatch({ type: "REMOVE_MODAL_DISPLAY" }); -- caused undefined error
-    setModalDisplay("none");
   }
 
   function setQuantity(e) {
@@ -116,10 +86,9 @@ function App() {
   return (
     <div className="App">
       <NavHeader cartQuantity={totalFoodAmount} setDisplay={setDisplay} />
-      <FoodList foodList={foods} addFood={addFood} setAmount={setQuantity} />
+      <FoodList addFood={addFood} setAmount={setQuantity} />
       <CartModal
         cartFoods={cartFoods}
-        display={modalDisplay}
         closeModal={removeModal}
         totalPrice={totalPrice}
         addFood={addMoreFood}

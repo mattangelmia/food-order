@@ -1,12 +1,15 @@
 import React from "react";
 import Add from "./Add";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function FoodList(props) {
+  const foodList = useSelector((state) => state.foods.foods);
+  console.log(foodList);
   return (
     <div
       style={{ border: "1px solid lightgrey", margin: "70px", width: "60vh" }}
     >
-      {props.foodList.map((food, index) => (
+      {foodList.map((food, index) => (
         <div
           style={{
             display: "flex",

@@ -1,8 +1,15 @@
 import React from "react";
 import "animate.css";
+import { useSelector, useDispatch } from "react-redux";
+
+import { displayModal, hideModal } from "./features/modalSlice";
 import { CSSTransition } from "react-transition-group";
 
 export default function CartModal(props) {
+  const display = useSelector((state) => state.display.modalDisplay);
+
+  const dispatch = useDispatch();
+
   return (
     <div
       style={{
@@ -13,7 +20,7 @@ export default function CartModal(props) {
         top: "0",
         left: "0",
         overflow: "scroll",
-        display: props.display,
+        display: display,
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -29,7 +36,7 @@ export default function CartModal(props) {
         className="cart-modal"
       >
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <h3 onClick={props.closeModal}>x</h3>
+          <h3 onClick={() => dispatch(hideModal())}>x</h3>
         </div>
         <h4 style={{ textAlign: "center" }}>Your Cart</h4>
 

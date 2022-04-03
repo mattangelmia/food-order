@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { displayModal, hideModal } from "./features/modalSlice";
 
 export default function Cart(props) {
+  const dispatch = useDispatch();
+
   return (
     <div
       id="cart-header"
@@ -13,7 +17,7 @@ export default function Cart(props) {
         margin: "10px",
       }}
       className="cart-section"
-      onClick={props.setDisplay}
+      onClick={() => dispatch(displayModal())}
     >
       <div style={{ marginRight: "20px" }}>
         <h4>Your Cart</h4>
