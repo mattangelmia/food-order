@@ -7,6 +7,8 @@ import { CSSTransition } from "react-transition-group";
 
 export default function CartModal(props) {
   const display = useSelector((state) => state.display.modalDisplay);
+  const cartItems = useSelector((state) => state.cartFoods.cartFoods);
+  console.log(cartItems);
 
   const dispatch = useDispatch();
 
@@ -40,10 +42,10 @@ export default function CartModal(props) {
         </div>
         <h4 style={{ textAlign: "center" }}>Your Cart</h4>
 
-        {props.cartFoods.length === 0 ? (
+        {cartItems.length === 0 ? (
           <h1>There are no Items in your cart</h1>
         ) : (
-          props.cartFoods.map((food, index) => (
+          cartItems.map((food, index) => (
             <div
               style={{
                 display: "flex",

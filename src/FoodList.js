@@ -1,14 +1,16 @@
 import React from "react";
 import Add from "./Add";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addFood } from "./features/realCartFoodsSlice";
 
 export default function FoodList(props) {
   const foodList = useSelector((state) => state.foods.foods);
-  console.log(foodList);
+
   const cartFoods = useSelector((state) => state.cartFoods);
-  console.log(cartFoods);
+
   const dispatch = useDispatch();
+  const [amountValue, setAmountValue] = useState(0);
 
   return (
     <div
@@ -32,7 +34,7 @@ export default function FoodList(props) {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", margin: "20px" }}>
               <h3>Amount</h3>
-              <input
+              {/* <input
                 type="number"
                 min="1"
                 max="5s"
@@ -43,10 +45,28 @@ export default function FoodList(props) {
                   position: "relative",
                   top: "2vh",
                 }}
+              ></input> */}
+              <input
+                type="number"
+                min="1"
+                max="5s"
+                onChange={(e) => setAmountValue(e.target.value)}
+                style={{
+                  height: "15px",
+                  width: "30px",
+                  position: "relative",
+                  top: "2vh",
+                }}
               ></input>
             </div>
-            <Add addFood={(e) => props.addFood(e)} food={food} />
-            <button onClick={() => dispatch(addFood(food))}></button>
+            {/* <Add addFood={(e) => props.addFood(e)} food={food} /> */}
+            <button
+              onClick={() =>
+                dispatch(addFood({ ...food, quantity: amountValue }))
+              }
+            >
+              ADD
+            </button>
           </div>
         </div>
       ))}
