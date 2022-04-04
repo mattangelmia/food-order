@@ -6,10 +6,9 @@ import { addFood } from "./features/realCartFoodsSlice";
 
 export default function FoodList(props) {
   const foodList = useSelector((state) => state.foods.foods);
-
-  const cartFoods = useSelector((state) => state.cartFoods);
-
+  const cartItems = useSelector((state) => state.cartFoods);
   const dispatch = useDispatch();
+  console.log(cartItems);
   const [amountValue, setAmountValue] = useState(0);
 
   return (

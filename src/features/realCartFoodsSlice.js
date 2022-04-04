@@ -12,6 +12,10 @@ export const cartFoodsSlice = createSlice({
   reducers: {
     addFood: (state, action, value) => {
       state.cartFoods.push(action.payload);
+      let total = state.cartFoods.reduce(function (a, b) {
+        return a + Number(b.quantity);
+      }, 0);
+      state.itemAmount = total;
     },
   },
 });

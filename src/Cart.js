@@ -5,6 +5,8 @@ import { displayModal, hideModal } from "./features/modalSlice";
 export default function Cart(props) {
   const dispatch = useDispatch();
 
+  const cartAmount = useSelector((state) => state.cartFoods.itemAmount);
+
   return (
     <div
       id="cart-header"
@@ -23,7 +25,7 @@ export default function Cart(props) {
         <h4>Your Cart</h4>
       </div>
       <div style={{ position: "relative", top: "0vh" }}>
-        <h4>Quantity: {props.cartQuantity}</h4>
+        <h4>Quantity: {cartAmount}</h4>
       </div>
     </div>
   );
