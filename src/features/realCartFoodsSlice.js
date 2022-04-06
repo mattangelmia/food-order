@@ -22,8 +22,13 @@ export const cartFoodsSlice = createSlice({
       let filtered = state.cartFoods.filter((c) => c.food !== addedFood.food);
       state.cartFoods = filtered.concat(addedFood);
     },
+    deleteItem: (state, action) => {
+      let deletedFood = action.payload;
+      let filtered = state.cartFoods.filter((c) => c.food !== deletedFood.food);
+      state.cartFoods = filtered.concat(deletedFood);
+    },
   },
 });
 
 export default cartFoodsSlice.reducer;
-export const { addFood, addNewItem } = cartFoodsSlice.actions;
+export const { addFood, addNewItem, deleteItem } = cartFoodsSlice.actions;

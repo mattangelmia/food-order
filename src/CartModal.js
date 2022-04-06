@@ -1,7 +1,7 @@
 import React from "react";
 import "animate.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addNewItem } from "./features/realCartFoodsSlice";
+import { addNewItem, deleteItem } from "./features/realCartFoodsSlice";
 import { displayModal, hideModal } from "./features/modalSlice";
 import { CSSTransition } from "react-transition-group";
 
@@ -65,7 +65,14 @@ export default function CartModal(props) {
               </div>
               <div style={{ display: "flex" }}>
                 <button
-                  onClick={() => props.deleteFood(food)}
+                  onClick={() =>
+                    dispatch(
+                      deleteItem({
+                        ...food,
+                        quantity: Number(food.quantity) - 1,
+                      })
+                    )
+                  }
                   style={{ margin: "10px", maxHeight: "20px" }}
                 >
                   -
