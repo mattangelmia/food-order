@@ -17,8 +17,13 @@ export const cartFoodsSlice = createSlice({
       }, 0);
       state.itemAmount = total;
     },
+    addNewItem: (state, action) => {
+      let addedFood = action.payload;
+      let filtered = state.cartFoods.filter((c) => c.food !== addedFood.food);
+      state.cartFoods = filtered.concat(addedFood);
+    },
   },
 });
 
 export default cartFoodsSlice.reducer;
-export const { addFood } = cartFoodsSlice.actions;
+export const { addFood, addNewItem } = cartFoodsSlice.actions;

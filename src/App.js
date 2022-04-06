@@ -35,13 +35,6 @@ function App() {
   //   cartFoodItems: [],
   // });
 
-  function setDisplay() {
-    // dispatch({ type: "ADD_MODAL_DISPLAY" });
-  }
-  function removeModal() {
-    // dispatch({ type: "REMOVE_MODAL_DISPLAY" }); -- caused undefined error
-  }
-
   function setQuantity(e) {
     console.log(e.target.value);
     setAmountValue(e.target.value);
@@ -85,11 +78,10 @@ function App() {
 
   return (
     <div className="App">
-      <NavHeader cartQuantity={totalFoodAmount} setDisplay={setDisplay} />
+      <NavHeader cartQuantity={totalFoodAmount} />
       <FoodList addFood={addFood} setAmount={setQuantity} />
       <CartModal
         cartFoods={cartFoods}
-        closeModal={removeModal}
         totalPrice={totalPrice}
         addFood={addMoreFood}
         deleteFood={deleteFoods}

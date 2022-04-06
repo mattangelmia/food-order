@@ -1,7 +1,7 @@
 import React from "react";
 import "animate.css";
 import { useSelector, useDispatch } from "react-redux";
-
+import { addNewItem } from "./features/realCartFoodsSlice";
 import { displayModal, hideModal } from "./features/modalSlice";
 import { CSSTransition } from "react-transition-group";
 
@@ -9,6 +9,10 @@ export default function CartModal(props) {
   const display = useSelector((state) => state.display.modalDisplay);
   const cartItems = useSelector((state) => state.cartFoods.cartFoods);
   console.log(cartItems);
+  let totalPrice = cartItems.reduce(
+    (acc, cur) => acc + cur.price * cur.quantity,
+    0
+  );
 
   const dispatch = useDispatch();
 
@@ -67,7 +71,14 @@ export default function CartModal(props) {
                   -
                 </button>
                 <button
-                  onClick={() => props.addFood(food)}
+                  onClick={() =>
+                    dispatch(
+                      addNewItem({
+                        ...food,
+                        quantity: Number(food.quantity) + 1,
+                      })
+                    )
+                  }
                   style={{ margin: "10px", maxHeight: "20px" }}
                 >
                   +
@@ -76,7 +87,7 @@ export default function CartModal(props) {
             </div>
           ))
         )}
-        <h2>Price: ${props.totalPrice}</h2>
+        <h2>Total Price: ${totalPrice}</h2>
       </div>
     </div>
   );
